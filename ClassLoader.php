@@ -136,7 +136,7 @@ class ClassLoader
 				$file = str_replace($this->seperator, DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
 			}
 
-			$file = str_replace('_', DIRECTORY_SEPARATOR, $class).this->extension;
+			$file = str_replace('_', DIRECTORY_SEPARATOR, $class).$this->extension;
 
 			if ($this->path != null) $file = $this->path.DIRECTORY_SEPARATOR.$file;
 

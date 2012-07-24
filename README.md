@@ -3,6 +3,8 @@ PHP SPL Class Loader
 
 A simple implementation of the PHP 5.3 SPL Class Loader.
 
+This is a work in progress and has not been fully tested. Use at your own risk.
+
 Features
 --------
 
@@ -19,7 +21,7 @@ Usage
 
 ```
 require_once('ClassLoader.php');
-$loader = new ClassLoader('Example/Src','/path/to/Example');
+$loader = new ClassLoader('Example\Src','/path/to/Example');
 $loader->register();
 
 // add an external search path
@@ -29,7 +31,7 @@ $loader->addPath('/path/to/external/library');
 Configuration
 -------------
 
-- ```setSeperator()```: sets the namespace seperator to use, '//' by default
+- ```setSeperator()```: sets the namespace seperator to use, '\\' by default
 - ```setExtension()```: sets the class file name extension, '.php' by default
 - ```addPath()```: add a user defined external search path
 

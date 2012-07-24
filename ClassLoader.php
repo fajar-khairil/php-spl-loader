@@ -4,7 +4,7 @@
 *	An SplClassLoader implementation for PHP 5.3.
 *	
 *	Example usage for loading classes from the Example/Src namespace:
-*		$loader = new SplLoader('Example/Src','/path/to/Example')
+*		$loader = new SplLoader('Example\Src','/path/to/Example')
 *		$loader->register();
 *
 *	You can also load classes from outside the current namespace.

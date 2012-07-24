@@ -129,12 +129,12 @@ class ClassLoader
 		{
 			$file = '';
 
-            if (($lastsep = strripos($class, $this->seperator)) !== false)
-            {
-            	$namespace = substr($class,0,$lastsep);
-            	$class = substr($class,$lastsep+1);
-            	$file = str_replace($this->seperator, DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
-            }
+			if (($lastsep = strripos($class, $this->seperator)) !== false)
+			{
+				$namespace = substr($class,0,$lastsep);
+				$class = substr($class,$lastsep+1);
+				$file = str_replace($this->seperator, DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
+			}
 
 			$file = str_replace('_', DIRECTORY_SEPARATOR, $class).this->extension;
 

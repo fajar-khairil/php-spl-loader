@@ -37,7 +37,7 @@ class ClassLoader
 	{
 		$this->namespace = $ns;
 		$this->path = $path;
-		$this->systemPath = explode(PATH_SEPERATOR, get_include_path());
+		$this->systemPath = explode(PATH_SEPARATOR, get_include_path());
 	}
 
 	/**
@@ -136,7 +136,7 @@ class ClassLoader
 				$file = str_replace($this->seperator, DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
 			}
 
-			$file = str_replace('_', DIRECTORY_SEPARATOR, $class).$this->extension;
+			$file .= str_replace('_', DIRECTORY_SEPARATOR, $class).$this->extension;
 
 			if ($this->path != null) $file = $this->path.DIRECTORY_SEPARATOR.$file;
 

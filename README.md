@@ -7,7 +7,7 @@ Features
 --------
 
 - Implements a PHP 5.3 namespace based autoloader.
-- Allows the the inclusion of external search paths.
+- Allows for the inclusion of external search paths.
 
 Requirements
 ------------

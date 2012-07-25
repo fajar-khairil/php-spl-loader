@@ -159,7 +159,7 @@ class ClassLoader
 		}
 
 		// no matches
-		throw new Exception('Unable to load $class. No matches in namespace or search paths.');
+		throw new Exception('Unable to load $class.');
 	}
 
 }

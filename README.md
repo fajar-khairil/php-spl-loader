@@ -3,8 +3,6 @@ PHP SPL Class Loader
 
 A simple implementation of the PHP 5.3 SPL Class Loader.
 
-This is a work in progress and has not been fully tested. Use at your own risk.
-
 Features
 --------
 
@@ -17,6 +15,7 @@ Requirements
 ------------
 
 - PHP 5.3 and above.
+- Class files must be in the format <classname>.php
 
 Usage
 -----

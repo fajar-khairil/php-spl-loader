@@ -21,7 +21,7 @@ Requirements
 Usage
 -----
 
-```
+```php
 <?php
 require_once('ClassLoader.php');
 $blocking = false;

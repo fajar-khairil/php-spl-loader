@@ -15,7 +15,7 @@ Requirements
 ------------
 
 - PHP 5.3 and above.
-- Class files must be in the format <classname>.php
+- Class files must be named the same as the class name. (ClassName -> ClassName.php, classname -> classname.php)
 
 Usage
 -----

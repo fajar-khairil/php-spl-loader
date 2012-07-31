@@ -13,6 +13,12 @@
 *
 *	If no matches are found, the loader will search the PHP include path.
 *
+*	The blocking parameter sets whether this class plays nicely in a multi
+*	autoloader stack environment or not. Setting to true will throw a
+*	ClassNotFoundException when no matching class can be found. Setting to 
+*	false will cause the loader to silently fail and allow the next autoloader
+*	on the stack to resolve the depedency.
+*
 *	@author Matt Colf <mattcolf@mattcolf.com>
 */
 
@@ -24,6 +30,7 @@ class ClassLoader
 	private $userPath = array();
 	private $extension = '.php';
 	private $seperator = '\\';
+	private $blocking;
 
 	/**
 	*	Create a new SplLoader that will load classes in the
@@ -31,13 +38,17 @@ class ClassLoader
 	*
 	*	@param string $ns The namespace to load from.
 	*	@param string $path The base path to load from.
+	*	@param bool $blocking True to throw an exception when a matching
+	*						  class cannot be found. False to silently fail
+	*						  and allow the next autoloader to try.
 	*	@return void
 	*/
-	public function __construct($ns = null, $path = null)
+	public function __construct($ns = null, $path = null, $blocking = false)
 	{
 		$this->namespace = $ns;
 		$this->path = $path;
 		$this->systemPath = explode(PATH_SEPARATOR, get_include_path());
+		$this->blocking = $blocking;
 	}
 
 	/**
@@ -123,6 +134,8 @@ class ClassLoader
 	*/
 	public function load($class)
 	{
+		$attempted = array();
+
 		// namespace
 		$ns = $this->namespace.$this->seperator;
 		if ($this->namespace == null || $ns === substr($class,0,strlen($ns)))
@@ -145,6 +158,7 @@ class ClassLoader
 				require($file);
 				return;
 			}
+			else $attempted[] = $file;
 		}		
 
 		// additional search paths
@@ -156,10 +170,62 @@ class ClassLoader
 				require($file);
 				return;
 			}
+			else $attempted[] = $file;
 		}
 
 		// no matches
-		throw new Exception('Unable to load $class.');
+		if ($this->blocking) 
+		{
+			throw new ClassNotFoundException("Unable to load $class.", $class, $attempted);
+		}
+	}
+
+}
+
+/**
+*	A simple exception to throw when when a class cannot be found.
+*/
+
+class ClassNotFoundException extends Exception
+{
+	protected $class;
+	protected $attempted;
+
+	/**
+	*	Create a new ClassNotFoundException.
+	*
+	*	@param string $message The exception text.
+	*	@param string $class The class name.
+	*	@param array $attempted An array of all paths attempted.
+	*/
+
+	public function __construct($message, $class, $attempted)
+	{
+		$this->class = $class;
+		$this->attempted = $attempted;
+		parent::__construct($message);
+	}
+
+	/**
+	*	Get the class name that failed to load.
+	*
+	*	@return string The classname.
+	*/
+
+	public function className()
+	{
+		return $this->class;
+	}
+
+	/**
+	*	Get an array of all paths attempted when trying to load the class.
+	*
+	*	@return array The attempted paths.
+	*/
+
+	public function attempted()
+	{
+		return $this->attempted;
 	}
 
 }

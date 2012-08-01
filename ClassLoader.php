@@ -18,9 +18,12 @@
 *	ClassNotFoundException when no matching class can be found. Setting to 
 *	false will cause the loader to silently fail and allow the next autoloader
 *	on the stack to resolve the depedency.
-*/
-
-/**
+*
+*	@version 1.0
+*	@author Matthew Colf <mattcolf@mattcolf.com>
+*
+*	@section LICENSE	
+*
 *	Copyright 2012 Matthew Colf <mattcolf@mattcolf.com>
 *
 *	Licensed under the Apache License, Version 2.0 (the "License");
